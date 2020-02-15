@@ -1,16 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-// Author: Eric Eastwood (ericeastwood.com)
-//
-// Description:
-//		Written for this gd.se question: http://gamedev.stackexchange.com/a/75748/16587
-//		Simulates/Emulates pendulum motion in code
-// 		Works in any 3D direction and with any force/direciton of gravity
-//
-// Demonstration: https://i.imgur.com/vOQgFMe.gif
-//
-// Usage: https://i.imgur.com/BM52dbT.png
+
 public class Pendulum : MonoBehaviour {
 	
 	public GameObject Pivot;
@@ -24,8 +15,7 @@ public class Pendulum : MonoBehaviour {
 	Vector3 bobStartingPosition;
 	bool bobStartingPositionSet = false;
 	
-	// You could define these in the `PendulumUpdate()` loop 
-	// But we want them in the class scope so we can draw gizmos `OnDrawGizmos()`
+	// Need to define these in the `PendulumUpdate()` loop, here to allow usage of Gizmos
 	private Vector3 gravityDirection;
 	private Vector3 tensionDirection;
 	
@@ -43,7 +33,7 @@ public class Pendulum : MonoBehaviour {
 	Vector3 currentStatePosition;
 	Vector3 previousStatePosition;
 	
-	// Use this for initialization
+	
 	void Start () {
 		// Set the starting position for later use in the context menu reset methods
 		this.bobStartingPosition = this.Bob.transform.position;
@@ -88,7 +78,6 @@ public class Pendulum : MonoBehaviour {
 	}
 	
 	
-	// Use this to reset forces and go back to the starting position
 	[ContextMenu("Reset Pendulum Position")]
 	void ResetPendulumPosition()
 	{
@@ -98,7 +87,7 @@ public class Pendulum : MonoBehaviour {
 			this.PendulumInit();
 	}
 	
-	// Use this to reset any built up forces
+
 	[ContextMenu("Reset Pendulum Forces")]
 	void ResetPendulumForces()
 	{
@@ -128,9 +117,9 @@ public class Pendulum : MonoBehaviour {
 	Vector3 PendulumUpdate(Vector3 currentStatePosition, float deltaTime)
 	{
 		// Add gravity free fall
-		this.gravityForce = this.mass * Physics.gravity.magnitude;
-		this.gravityDirection = Physics.gravity.normalized;
-		this.currentVelocity += this.gravityDirection * this.gravityForce * deltaTime;
+		this.gravityForce = -(this.mass * Physics.gravity.magnitude);
+		this.gravityDirection = -(Physics.gravity.normalized);
+		this.currentVelocity -= this.gravityDirection * this.gravityForce * deltaTime;
 		
 		Vector3 pivot_p = this.Pivot.transform.position;
 		Vector3 bob_p = this.currentStatePosition;
