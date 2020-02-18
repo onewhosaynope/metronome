@@ -2,7 +2,7 @@
 using System.Collections;
 
 
-public class Pendulum : MonoBehaviour {
+public class InvertedPendulum : MonoBehaviour {
 	
 	public GameObject Pivot;
 	public GameObject Bob;
