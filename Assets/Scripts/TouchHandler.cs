@@ -18,20 +18,22 @@ public class TouchHandler : MonoBehaviour  {
 
     // Update is called once per frame
     void FixedUpdate() {
-        if (Input.GetKeyDown(KeyCode.A)) {
+        if (Input.GetKeyDown(KeyCode.N)) {
             target.AddForce(transform.right * thrust);
         }
 
-        if (Input.GetKeyDown(KeyCode.D)) {
+        if (Input.GetKeyDown(KeyCode.M)) {
             target.AddForce(-(transform.right) * thrust);
         }
 
-        if (Input.GetKeyDown(KeyCode.L)) {
+        if (Input.GetKeyDown(KeyCode.B)) {
             Debug.Log("velocity: " + velocity + "\nimpactForce: " + impactForce);
             Debug.Log("contacts: ");
             foreach (var contact in contacts) {
                 Debug.Log(contact);
             }
+
+            Debug.Log("angle" + transform.rotation);
         }
     }
 
