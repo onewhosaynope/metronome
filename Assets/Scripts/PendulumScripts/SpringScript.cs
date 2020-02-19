@@ -23,14 +23,14 @@ public class SpringScript : MonoBehaviour
         {
             Debug.Log($"More than 15 \nCurrent angle: {rotY}");
             var spring = hinge.spring;
-            spring.targetPosition = -10;
+            spring.targetPosition = -8;
             hinge.spring = spring;
         }
         else if (rotY < -15)
         {
             Debug.Log($"Less than -15 \nCurrent angle: {rotY}");
             var spring = hinge.spring;
-            spring.targetPosition = 10;
+            spring.targetPosition = 8;
             hinge.spring = spring;
         }
     }
