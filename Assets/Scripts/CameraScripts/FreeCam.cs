@@ -5,6 +5,7 @@ using System.Text;
 using UnityEngine;
 
 // wasd	             - movement
+// i or j            - increase / decrease projectile speed
 // o or k            - increase / decrease camera movement speed for 1f 
 // p or l            - increase / decrease free look sensitivity
 // right mouse  	 - enable free look camera
@@ -25,12 +26,12 @@ public class FreeCam : MonoBehaviour
     public GameObject prefab;
     
     // Amount of force applied to projectile.
-    public float prefabSpeed;
+    public float prefabSpeed = 1f;
 
     void Update()
     {
         // Shooting from camera to mouse position (KEY "LMB")
-        if(Input.GetKey(KeyCode.Mouse0)) {
+        if(Input.GetKeyDown(KeyCode.Mouse0)) {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out RaycastHit hit)) {
                 Vector3 target = new Vector3(hit.point.x, hit.point.y, hit.point.z);
@@ -84,12 +85,12 @@ public class FreeCam : MonoBehaviour
         
         // Camera movement speed
         // camera speed increasing (KEY "O")
-        if (Input.GetKey(KeyCode.O))
+        if (Input.GetKeyDown(KeyCode.O))
         {
             movementSpeed = movementSpeed + 1F;
         }
         // camera speed decreasing (KEY "K")
-        if (Input.GetKey(KeyCode.K))
+        if (Input.GetKeyDown(KeyCode.K))
         {
             movementSpeed = movementSpeed - 1F;
         }
@@ -97,15 +98,40 @@ public class FreeCam : MonoBehaviour
         
         // Free Look sensitivity
         // free look increasing
-        if (Input.GetKey(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.P))
         {
             freeLookSensitivity = freeLookSensitivity + 1F;
         }
         // free lock decreasing
-        if (Input.GetKey(KeyCode.L))
+        if (Input.GetKeyDown(KeyCode.L))
         {
             freeLookSensitivity = freeLookSensitivity - 1F;
         }
+        
+        
+        // Projectile launch speed
+        // Projectile speed increasing
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            prefabSpeed = prefabSpeed + 1F;
+        }
+        // Projectile speed decreasing
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            prefabSpeed = prefabSpeed - 1F;
+        }
+    }
+    
+    void OnGUI()
+    {
+        GUILayout.Label("Current Values:" +
+                        "\nProjectile launch speed: " + prefabSpeed + 
+                        "\nCamera movement speed: " + movementSpeed + 
+                        "\nFree Look Sensitivity: " + freeLookSensitivity);
+        GUILayout.Label("Controls:" +
+                        "\ni or j - increase / decrease projectile speed " +
+                        "\no or k - increase / decrease camera movement speed " +
+                        "\np or l - increase / decrease free look sensitivity");
     }
 
     
