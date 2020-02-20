@@ -3,16 +3,14 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-public class SpringScript : MonoBehaviour
+public class NewSpringScript : MonoBehaviour
 {
     private HingeJoint hinge;
-
-    public float barrier = 15;
-    public float target = 8;
     // Start is called before the first frame update
     void Start()
     {
         hinge = GetComponent<HingeJoint>();
+        float y = transform.rotation.y;
     }
 
     // Update is called once per frame
@@ -21,18 +19,18 @@ public class SpringScript : MonoBehaviour
         var rotY = transform.localRotation.eulerAngles.y;
         rotY = rotY >= 180 ? rotY - 360 : rotY;
 
-        if (rotY > barrier)
+        if (rotY > 15)
         {
             Debug.Log($"More than 15 \nCurrent angle: {rotY}");
             var spring = hinge.spring;
-            spring.targetPosition = -target;
+            spring.targetPosition = -20;
             hinge.spring = spring;
         }
-        else if (rotY < -barrier)
+        else if (rotY < -15)
         {
             Debug.Log($"Less than -15 \nCurrent angle: {rotY}");
             var spring = hinge.spring;
-            spring.targetPosition = target;
+            spring.targetPosition = 20;
             hinge.spring = spring;
         }
     }
