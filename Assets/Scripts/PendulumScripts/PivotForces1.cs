@@ -29,7 +29,6 @@ public class PivotForces1 : MonoBehaviour
             timer = timer + step;
             float angle2 = amplitude * Mathf.Cos(2 * Mathf.PI * timer / period);
             transform.localRotation = Quaternion.Euler(0f, angle2, 0f);
-            Debug.Log(timer);
         }
     }
 

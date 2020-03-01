@@ -18,6 +18,7 @@ public class ColliderRight : MonoBehaviour
     {
         pivotValues.rotate = false;
         Debug.Log("Right collider Enter");
+        Debug.Log(other.relativeVelocity);
     }
 
     private void OnCollisionExit(Collision other)
@@ -25,5 +26,6 @@ public class ColliderRight : MonoBehaviour
         pivotValues.step = -0.01f;
         pivotValues.rotate = true;
         Debug.Log("Right collider Exit");
+        Debug.Log(other.relativeVelocity);
     }
 }
